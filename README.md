@@ -10,10 +10,13 @@ This code uses vite to run a ReactJS web app that has a viewer and code editor. 
 
     token="<Insert Cesium Ion Access Token>"
 	  echo "VITE_CESIUM_TOKEN=$token" > .env
-    
+
 Then, install dependencies and run it:
 
     npm install
     npm run dev
 
 There is a sample GeoJSON file stored in `./src/assets/` and this is used as the default GeoJSON in the viewer / editor. 
+
+## License
+GPLv3. Availabe in [LICENSE](./LICENSE).
