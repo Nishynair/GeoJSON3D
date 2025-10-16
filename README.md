@@ -1,12 +1,19 @@
-# React + Vite
+# GeoJSON3D
+A simple 3D Viewer for GeoJSON files. This viewer supports 3D coordinates and allows the user to see their features on an earth model. Currently has default Bing basemap imagery, and uses OpenStreetMap 3d Buildings. This is a work in progress.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live app
+![Screenshot1](./public/GeoJSON3D_screen1.jpg)
+There is a live working demo hosted on github pages: https://nishynair.github.io/GeoJSON3D/
 
-Currently, two official plugins are available:
+## Usage
+This code uses vite to run a ReactJS web app that has a viewer and code editor. For the viewer, it uses CesiumJS to render a 3D earth model with buildings and visualize GeoJSON data. For the editor it uses Monaco editor to display a GeoJSON file in an editor. To start, create a `.env` file to save your npm token:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    token="<Insert Cesium Ion Access Token>"
+	  echo "VITE_CESIUM_TOKEN=$token" > .env
+    
+Then, install dependencies and run it:
 
-## Expanding the ESLint configuration
+    npm install
+    npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+There is a sample GeoJSON file stored in `./src/assets/` and this is used as the default GeoJSON in the viewer / editor. 
