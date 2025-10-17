@@ -153,7 +153,7 @@ export default function GeojsonBox({
                 "& .hl-char": { backgroundColor: errorColor },
                 // to get rounded borders, prevent monaco from painting over it
                 overflow: "hidden", 
-                borderRadius: 1,
+                borderRadius: 2,
                 borderColor: "divider",
             }}
         >

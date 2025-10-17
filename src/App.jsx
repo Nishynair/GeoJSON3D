@@ -68,7 +68,7 @@ function App() {
           sx={{
             minWidth: 0,
             minHeight: { xs: "45vh", md: 0 },
-            borderRadius: 1,
+            borderRadius: 2,
             overflow: "hidden",
           }}
         />
@@ -80,7 +80,8 @@ function App() {
             minWidth: 0,
             height: "100%",
             minHeight: { xs: "45vh", md: 0 },
-            borderRadius: 1,
+            borderRadius: 2,
+            overflow: "hidden",
             bgcolor: theme.palette.background.default,
           }}
         />
