@@ -15,12 +15,17 @@ const extractColumnLineFromErrMsg = (errorMessage) => {
 export default function GeojsonBox({
   text,
   setText,
+  sx = {},
+  isCompact = false,
 }) {
   const editorRef = useRef(null);
   const monacoRef = useRef(null);
   const decorationIdsRef = useRef([]);
   const [errorMessages, setErrorMessages] = useState([]);
   const [currentErrorMessage, setCurrentErrorMessage] = useState(null);
+  const lineNumbersMinChars = isCompact ? 2 : 4;
+  const editorFontSize = isCompact ? 12 : 14;
+  const minimapEnabled = !isCompact;
 
   // Checks if GeoJSON is valid
   useEffect(() => {
@@ -89,6 +94,19 @@ export default function GeojsonBox({
     decorationIdsRef.current = editor.deltaDecorations(decorationIdsRef.current, newDecorations);
   }, [errorMessages]);
 
+  useEffect(() => {
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    editor.updateOptions({
+      lineNumbersMinChars,
+      fontSize: editorFontSize,
+      minimap: {
+        enabled: minimapEnabled,
+      },
+    });
+  }, [lineNumbersMinChars, editorFontSize, minimapEnabled]);
+
   const onMount = (editor, monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
@@ -96,9 +114,14 @@ export default function GeojsonBox({
     editor.updateOptions({
       fontLigatures: true,
       renderWhitespace: "selection",
-      lineNumbersMinChars: 4,
+      lineNumbersMinChars,
+      fontSize: editorFontSize,
+      minimap: {
+        enabled: minimapEnabled,
+      },
       cursorBlinking: "smooth",
       scrollBeyondLastLine: false,
+      automaticLayout: true,
     });
 
     // Check if content changed
@@ -113,8 +136,10 @@ export default function GeojsonBox({
             display: "flex",
             flexDirection: "column",
             minHeight: 0,
+            height: "100%",
             borderColor: "divider",
             gap:1,
+            ...sx,
         }}>
         <Box sx={{
             flex: "0 1 auto",
