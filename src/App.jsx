@@ -1,7 +1,9 @@
 import './App.css'
 import { useEffect, useState, useMemo } from 'react';
 import Box from '@mui/material/Box';
-import { TEXT_BOX_WIDTH } from './consts';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { TEXT_BOX_MIN_WIDTH, TEXT_BOX_MAX_WIDTH } from './consts';
 import GeojsonBox  from "./components/GeojsonBox";
 import KlccFlat from "./assets/sampleJSON/klcc-flat.json"
 import Viewer3D from './components/Viewer';
@@ -19,6 +21,8 @@ function App() {
   const [geojson, setGeojson] = useState(KlccFlat);
   const [editingGeoJSON, setEditingGeoJSON] = useState(false);
   const [stringJson, setStringJson] = useState(JSON.stringify(geojson, null, 2));
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   // debounce for 1 second before saving a new GeoJSON
   const debouncedSet = useMemo(
@@ -49,27 +53,36 @@ function App() {
       <Box 
         sx={{
           display: "grid",
-          height: "100%",
+          flex: 1,
+          width: "100%",
           minWidth: 0,
-          gridTemplateColumns: `1fr ${TEXT_BOX_WIDTH}`,
+          minHeight: "100%",
+          gridTemplateColumns: isSmallScreen ? "1fr" : `minmax(0, 1fr) clamp(${TEXT_BOX_MIN_WIDTH}, 40vw, ${TEXT_BOX_MAX_WIDTH})`,
+          gridTemplateRows: isSmallScreen ? "minmax(0, 0.55fr) minmax(0, 0.45fr)" : "minmax(0, 1fr)",
+          gridAutoRows: "minmax(0, 1fr)",
+          gap: { xs: 1, md: 2 },
           overflow: "hidden",
-          gap: 1,
-      }}>
-        <Box
+        }}>
+        <Viewer3D
+          geojson={geojson}
           sx={{
-            flex: 1,
             minWidth: 0,
-            minHeight: 0,
+            minHeight: { xs: "45vh", md: 0 },
             borderRadius: 1,
             overflow: "hidden",
-        }}>
-          <Viewer3D
-            geojson={geojson}
-          />
-        </Box>
+          }}
+        />
         <GeojsonBox
           text={stringJson}
           setText={setStringJson}
+          isCompact={isSmallScreen}
+          sx={{
+            minWidth: 0,
+            height: "100%",
+            minHeight: { xs: "45vh", md: 0 },
+            borderRadius: 1,
+            bgcolor: theme.palette.background.default,
+          }}
         />
       </Box>
   );

@@ -54,7 +54,7 @@ export default function Viewer3D({
 
 
   useEffect(() => {
-    if (viewerRef && viewerRef.current){
+    if (viewerRef?.current?.dataSources){
 
       const viewer = viewerRef.current;
       // Remove the previously loaded geojson if any
@@ -123,7 +123,7 @@ export default function Viewer3D({
   }, [isRotating, rotationData]);
 
  return (
-    <Box sx={{ position: "relative", height: "100vh" }}>
+    <Box sx={{ position: "relative", height: "100%" }}>
       <Box
         ref={containerRef}
         sx={{

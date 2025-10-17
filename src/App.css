@@ -1,6 +1,8 @@
 #root {
   width: 100%;
   margin: 0 auto;
-  text-align: center;
-  padding: 1rem;
+  text-align: left;
+  padding: clamp(0.5rem, 2vw, 1.25rem);
+  display: flex;
+  background-color: black;
 }
