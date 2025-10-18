@@ -4,7 +4,7 @@ import cesium from "vite-plugin-cesium";
 
 export default defineConfig({
   plugins: [react(), cesium()],
-  base: "/GeoJSON3D/", // public path for GitHub Pages
+  base: "/Geoviewer3D/", // public path for GitHub Pages
   build: {
     outDir: "dist",
   },

@@ -35,12 +35,12 @@ jobs:
           VITE_CESIUM_TOKEN: ${{ secrets.VITE_CESIUM_TOKEN }}
         run: npm run build
 
-      # Move Cesium folder up one level if vite-plugin-cesium nested it under dist/GeoJSON3D/
+      # Move Cesium folder up one level if vite-plugin-cesium nested it under dist/Geoviewer3D/
       - name: Fix Cesium asset path
         run: |
-          if [ -d "dist/GeoJSON3D/cesium" ]; then
-            mv dist/GeoJSON3D/cesium dist/cesium
-            rm -rf dist/GeoJSON3D
+          if [ -d "dist/Geoviewer3D/cesium" ]; then
+            mv dist/Geoviewer3D/cesium dist/cesium
+            rm -rf dist/Geoviewer3D
           fi
 
       - name: Upload artifact

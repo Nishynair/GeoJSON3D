@@ -7,6 +7,7 @@ import { TEXT_BOX_MIN_WIDTH, TEXT_BOX_MAX_WIDTH } from './consts';
 import GeojsonBox  from "./components/GeojsonBox";
 import KlccFlat from "./assets/sampleJSON/klcc-flat.json"
 import Viewer3D from './components/Viewer';
+import MenuBar from './components/MenuBar'
 
 // Simple debounce function to prevent constantly updating the GeoJSON
 const debounce = (fn, ms = 250) => {
@@ -50,25 +51,33 @@ function App() {
   }, [editingGeoJSON]);
 
   return (
+    <Box
+      sx={{
+        display:"flex",
+        flexDirection: "column",
+        width: "100%",
+        minWidth: 0,
+        minHeight: "100%",
+      }}>
+      <MenuBar text={stringJson} setText={setStringJson} />
       <Box 
         sx={{
           display: "grid",
           flex: 1,
-          width: "100%",
-          minWidth: 0,
-          minHeight: "100%",
           gridTemplateColumns: isSmallScreen ? "1fr" : `minmax(0, 1fr) clamp(${TEXT_BOX_MIN_WIDTH}, 40vw, ${TEXT_BOX_MAX_WIDTH})`,
           gridTemplateRows: isSmallScreen ? "minmax(0, 0.55fr) minmax(0, 0.45fr)" : "minmax(0, 1fr)",
           gridAutoRows: "minmax(0, 1fr)",
-          gap: { xs: 1, md: 2 },
+          gap: 1,
+          padding:1,
           overflow: "hidden",
-        }}>
+        }}
+      >
         <Viewer3D
           geojson={geojson}
           sx={{
             minWidth: 0,
             minHeight: { xs: "45vh", md: 0 },
-            borderRadius: 1,
+            borderRadius: 2,
             overflow: "hidden",
           }}
         />
@@ -80,11 +89,13 @@ function App() {
             minWidth: 0,
             height: "100%",
             minHeight: { xs: "45vh", md: 0 },
-            borderRadius: 1,
+            borderRadius: 2,
+            overflow: "hidden",
             bgcolor: theme.palette.background.default,
           }}
         />
       </Box>
+    </Box>
   );
 }
 
