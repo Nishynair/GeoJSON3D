@@ -1,12 +1,14 @@
 import { 
   AppBar, 
-  Button, 
   Toolbar, 
   Typography
 } from "@mui/material";
 import UploadButton from "./MenuButtons/UploadButton";
+import DownloadButton from "./MenuButtons/DownloadButton";
+import CopyButton from "./MenuButtons/CopyButton";
+import InfoButton from "./MenuButtons/InfoButton";
 
-export default function MenuBar ({setFileText}) {
+export default function MenuBar ({text, setText}) {
   return (
     <AppBar position="static" >
       <Toolbar variant="dense">
@@ -17,9 +19,12 @@ export default function MenuBar ({setFileText}) {
             flexGrow: 1,
           }}
         >
-          GeoJSON 3D
+          Geoviewer3D
         </Typography>
-        <UploadButton setFileText={setFileText}/>
+        <UploadButton setText={setText}/>
+        <DownloadButton text={text}/>
+        <CopyButton text={text}/>
+        <InfoButton/>
       </Toolbar>
     </AppBar>
 

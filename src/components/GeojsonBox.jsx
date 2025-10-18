@@ -37,7 +37,7 @@ export default function GeojsonBox({
         setCurrentErrorMessage(null);
 
     }
-    catch(error){
+   catch (error){
         setErrorMessages(structuredClone(error.issues));
         setCurrentErrorMessage(error.issues[0].message);
     }

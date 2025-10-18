@@ -59,7 +59,7 @@ function App() {
         minWidth: 0,
         minHeight: "100%",
       }}>
-      <MenuBar setFileText={setStringJson}/>
+      <MenuBar text={stringJson} setText={setStringJson} />
       <Box 
         sx={{
           display: "grid",

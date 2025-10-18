@@ -1,7 +1,7 @@
-import { IconButton, Box } from "@mui/material";
-import UploadIcon from '@mui/icons-material/Upload';
+import { IconButton, Box, Tooltip } from "@mui/material";
+import UploadOutlinedIcon from '@mui/icons-material/UploadOutlined';
 
-export default function UploadButton({setFileText = ()=>{} }) {
+export default function UploadButton({setText = ()=>{} }) {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -13,10 +13,10 @@ export default function UploadButton({setFileText = ()=>{} }) {
         try{
           // Quick way to validate and format JSON
           const text = JSON.stringify(JSON.parse(e.target.result), null, 2);
-          setFileText(text);
+          setText(text);
           // So that another file can be uploaded
           event.target.value = null;
-        } catch(error){
+        }catch (error){
           console.error("Invalid GeoJSON:", error.message);
         }
       }
@@ -36,9 +36,11 @@ export default function UploadButton({setFileText = ()=>{} }) {
         onChange={handleFileChange}
       />
       <label htmlFor="upload-json">
-        <IconButton variant="contained" component="span">
-          <UploadIcon sx={{ color:"white" }}/>
-        </IconButton>
+        <Tooltip title='Upload GeoJSON'>
+          <IconButton variant="contained" component="span">
+            <UploadOutlinedIcon sx={{ color:"white" }}/>
+          </IconButton>
+        </Tooltip>
       </label>
     </Box>
   );
