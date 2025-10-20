@@ -12,7 +12,7 @@ const extractColumnLineFromErrMsg = (errorMessage) => {
     return [line, column];
 }
 
-export default function GeojsonBox({
+export default function GeojsonEditor({
   text,
   setText,
   sx = {},

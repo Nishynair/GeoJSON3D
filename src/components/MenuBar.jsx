@@ -3,10 +3,10 @@ import {
   Toolbar, 
   Typography
 } from "@mui/material";
-import UploadButton from "./MenuButtons/UploadButton";
-import DownloadButton from "./MenuButtons/DownloadButton";
-import CopyButton from "./MenuButtons/CopyButton";
-import InfoButton from "./MenuButtons/InfoButton";
+import UploadButton from "./Buttons/UploadButton";
+import DownloadButton from "./Buttons/DownloadButton";
+import CopyButton from "./Buttons/CopyButton";
+import InfoButton from "./Buttons/InfoButton";
 
 export default function MenuBar ({text, setText}) {
   return (
